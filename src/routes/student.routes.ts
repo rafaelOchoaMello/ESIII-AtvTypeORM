@@ -1,4 +1,4 @@
-import {  Router} from 'express';
+import {  Router } from 'express';
 import { getRepository } from 'typeorm';
 import { Student } from '../entity/Student';
 
@@ -10,7 +10,6 @@ studentRoutes.post('/', async (req, res) => {
 
         const { name } = req.body;
 
-        console.log(name)
         const student ={
             name
         }
