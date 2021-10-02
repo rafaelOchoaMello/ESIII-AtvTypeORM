@@ -10,8 +10,8 @@ export class Student {
     name: string;
 
     @CreateDateColumn({name: 'created_At'})
-    createAt: Date;
+    createAt?: Date;
 
     @UpdateDateColumn({name: 'updated_At'})
-    updateAt: Date;
+    updateAt?: Date;
 }
