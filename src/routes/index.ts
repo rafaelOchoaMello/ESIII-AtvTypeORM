@@ -7,7 +7,7 @@ import studentRoutes from './student.routes';
 const routes = Router();
 routes.use('/client', clientRoutes);
 routes.use('/product', productRoutes);
-routes.use('student', studentRoutes)
+routes.use('/student', studentRoutes)
 /*routes.use('/products', productRouter); */
 
 export default routes;
