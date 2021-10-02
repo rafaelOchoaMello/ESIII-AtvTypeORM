@@ -37,7 +37,7 @@ studentRoutes.get('/', async (req, res) => {
     }
 });
 
-studentRoutes.get('/id', async (req, res) => {
+studentRoutes.get('/:id', async (req, res) => {
     try{
         const responseStudent = getRepository(Student);
 
