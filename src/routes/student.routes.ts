@@ -55,6 +55,33 @@ studentRoutes.get('/:id', async (req, res) => {
     }
 });
 
+studentRoutes.put('/:id', async(req, res)=>{
+    
+    try{
+        const responseStudent = getRepository(Student);
+        
+        const id = req.params.id;
+
+        const { name } = req.body;
+
+       const studentExit = await  responseStudent.findOne(id)
+        
+       if(studentExit){
+        //    const studentUpdate = await responseStudent.update(id , {...studentExit, name});
+            studentExit.name = name;
+           const studentUpdate = await responseStudent.save(studentExit);
+           console.log(studentUpdate);
+           return res.status(200).json(studentUpdate);
+           
+        //     const alt = await responseStudent.merge(unse, name)
+        }
+
+    }catch(err){
+        // console.log("Erro: ", err.message)
+        return res.status(500).json({"Error":err});
+    }
+});
+
 studentRoutes.delete('/:id', async(req, res)=>{
     
         try{
