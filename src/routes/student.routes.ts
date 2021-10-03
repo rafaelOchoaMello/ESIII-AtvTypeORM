@@ -71,7 +71,6 @@ studentRoutes.put('/:id', async(req, res)=>{
            
            const studentUpdate = await responseStudent.save(studentExit);
            
-           console.log(studentUpdate);
            return res.status(200).json(studentUpdate);
         }
 
