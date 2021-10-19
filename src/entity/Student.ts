@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"; 
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm"; 
+import { Class } from "./Class";
 
 @Entity()
 export class Student {
@@ -14,4 +15,11 @@ export class Student {
 
     @UpdateDateColumn({name: 'updated_At'})
     updateAt?: Date;
+
+    @ManyToMany(type => Class, {
+        eager: true,
+        cascade: true
+    })
+    @JoinTable()
+    classes: Class[]
 }
