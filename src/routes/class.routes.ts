@@ -9,8 +9,11 @@ const classRoutes = Router();
 classRoutes.post('/', async (req, res) => {
     try {
         const classRepository = getRepository(Class);
-        const classData = req.body.class;
-        const newClass = await classRepository.create(classData);
+        const { name }= req.body;
+        const classData = {
+            name
+        } 
+        const newClass = classRepository.create(classData);
         const saveResponse = await classRepository.save(newClass)
         return res.status(201).json(saveResponse);
     } catch (err) { return res.status(400).json({ "Error": err }); }
