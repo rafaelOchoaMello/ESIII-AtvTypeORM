@@ -8,10 +8,11 @@ studentRoutes.post('/', async (req, res) => {
     try {
         const studentRepository = getRepository(Student);
 
-        const { name } = req.body;
+        const { name, classes } = req.body;
 
         const student ={
-            name
+            name,
+            classes
         }
  
         const newStudent = await studentRepository.create(student);
