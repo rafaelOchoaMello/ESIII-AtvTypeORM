@@ -1,3 +1,4 @@
+import { validate } from 'class-validator';
 import {  Router } from 'express';
 import { getRepository } from 'typeorm';
 import { Student } from '../entity/Student';
@@ -17,9 +18,15 @@ studentRoutes.post('/', async (req, res) => {
  
         const newStudent = await studentRepository.create(student);
 
-        const responseStudent = await studentRepository.save(newStudent);
+        const errors = await validate(newStudent)
 
-        return res.status(201).json(responseStudent);
+        if(errors.length === 0){
+            const responseStudent = await studentRepository.save(newStudent);
+            res.status(201).json(responseStudent);
+        }else{
+            res.status(400).json(errors);
+        }
+
     } catch(err){
         //  console.log(`Error message::${err.message}`)
          return res.status(400).json({"Error":err});
@@ -76,7 +83,6 @@ studentRoutes.put('/:id', async(req, res)=>{
         }
 
     }catch(err){
-        // console.log("Erro: ", err.message)
         return res.status(500).json({"Error":err});
     }
 });
@@ -90,7 +96,6 @@ studentRoutes.delete('/:id', async(req, res)=>{
             const studentDelete = await responseStudent.delete(id);
             return res.status(200).send();
         }catch(err){
-            // console.log("Erro: ", err.message)
             return res.status(500).json({"Error":err});
         }
 });
