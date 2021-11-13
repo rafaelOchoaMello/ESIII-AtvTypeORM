@@ -1,19 +1,15 @@
 import { 
     Entity, 
-    PrimaryGeneratedColumn, 
-    Column, CreateDateColumn, 
-    UpdateDateColumn, 
+    Column, 
     ManyToMany, 
     JoinTable, 
-    IsNull} from "typeorm"; 
+} from "typeorm"; 
 import { IsNotEmpty, IsString, MinLength } from "class-validator";
 import { Class } from "./Class";
+import BaseEntity from "./BaseEntity";
 
 @Entity()
-export class Student {
-
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+export class Student extends BaseEntity{
 
     @Column({length:45, nullable:false})
     @IsString()
@@ -21,16 +17,11 @@ export class Student {
     @MinLength(5,{message: 'Nome deve ter mo minimo 5 caractere'})
     name: string;
 
-    @CreateDateColumn({name: 'created_At'})
-    createAt?: Date;
-
-    @UpdateDateColumn({name: 'updated_At'})
-    updateAt?: Date;
-
     @ManyToMany(type => Class, {
         eager: true,
        
     })
     @JoinTable()
     classes: Class[]
+    
 }
